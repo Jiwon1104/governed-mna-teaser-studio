@@ -1,0 +1,831 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Governed M&amp;A Teaser Studio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<style>
+/* Layout: dark-slate command bar over a three-pane workbench: input | anonymous teaser | governance telemetry. */
+:root{
+  --bg:#eceff5; --surface:#ffffff; --surface2:#f5f7fb; --line:#d9dfea; --line2:#e8ecf3;
+  --fg:#0e1829; --fg2:#445268; --fg3:#5f6e86;
+  --accent:#4f46e5; --accent-soft:#eceeff; --accent-ink:#3a33b8;
+  --ok:#047857; --ok-soft:#e3f5ec; --ok-solid:#059669;
+  --warn:#9a5806; --warn-soft:#fcf1dc;
+  --bad:#b42318; --bad-soft:#fde9e7;
+  --mask-bg:#e9ebff; --mask-fg:#3730a3;
+  --hdr:#0a111f; --hdr-fg:#e8edf7; --hdr-mute:#93a3bd; --hdr-line:#1c2940;
+  --paper:#ffffff; --paper-fg:#18222f;
+  --shadow:0 1px 2px rgba(15,26,43,.05);
+  --f-sans:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --f-mono:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --f-serif:'Source Serif 4',Georgia,'Times New Roman',serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#080e1c; --surface:#0f1829; --surface2:#0b1322; --line:#22304a; --line2:#192640;
+    --fg:#e6ebf5; --fg2:#a8b4c9; --fg3:#8190a8;
+    --accent:#8e96ff; --accent-soft:#1b2250; --accent-ink:#c3c8ff;
+    --ok:#3ddc9a; --ok-soft:#0d2a21; --ok-solid:#10b981;
+    --warn:#f2b441; --warn-soft:#2b2210;
+    --bad:#ff8a80; --bad-soft:#2d1416;
+    --mask-bg:#222a5c; --mask-fg:#c9ceff;
+    --hdr:#050a14; --hdr-line:#16223a;
+    --paper:#131e34; --paper-fg:#e3e9f4; --shadow:none;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#080e1c; --surface:#0f1829; --surface2:#0b1322; --line:#22304a; --line2:#192640;
+  --fg:#e6ebf5; --fg2:#a8b4c9; --fg3:#8190a8;
+  --accent:#8e96ff; --accent-soft:#1b2250; --accent-ink:#c3c8ff;
+  --ok:#3ddc9a; --ok-soft:#0d2a21; --ok-solid:#10b981;
+  --warn:#f2b441; --warn-soft:#2b2210;
+  --bad:#ff8a80; --bad-soft:#2d1416;
+  --mask-bg:#222a5c; --mask-fg:#c9ceff;
+  --hdr:#050a14; --hdr-line:#16223a;
+  --paper:#131e34; --paper-fg:#e3e9f4; --shadow:none;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.5 var(--f-sans);-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--hdr)}
+button{font:inherit;color:inherit;cursor:pointer}
+h1,h2,h3,p,ul{margin:0}
+ul{padding:0;list-style:none}
+.mono{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* header */
+.top{background:var(--hdr);color:var(--hdr-fg);border-bottom:1px solid var(--hdr-line)}
+.top-in,.main{max-width:1680px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.top-in{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:14px 24px;padding-block:14px}
+.brand{display:flex;align-items:center;gap:14px;min-width:0}
+.mono-k3{flex:none;width:40px;height:40px;border-radius:6px;background:#4f46e5;color:#fff;display:grid;place-items:center;font:600 16px var(--f-mono);letter-spacing:-.02em}
+.brand-kicker{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--hdr-mute)}
+.brand h1{font-size:19px;font-weight:600;line-height:1.25;text-wrap:balance}
+.brand h1 span{color:var(--hdr-mute);font-weight:400}
+.top-actions{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.policy-chip{display:inline-flex;align-items:center;gap:8px;font-size:12px;color:var(--hdr-mute);padding:6px 10px;border:1px solid var(--hdr-line);border-radius:4px}
+.dot{width:7px;height:7px;border-radius:50%;background:#34d399;flex:none}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:36px;padding:0 14px;border-radius:5px;border:1px solid var(--line);background:var(--surface);font-weight:500;font-size:13px;white-space:nowrap;transition:background .12s,border-color .12s}
+.btn:hover{background:var(--surface2)}
+.btn-primary{background:#4f46e5;border-color:#4f46e5;color:#fff}
+.btn-primary:hover{background:#4338ca}
+.btn-ok{background:#047857;border-color:#047857;color:#fff}
+.btn-ok:hover{background:#065f46}
+.btn-ok.is-blocked{background:var(--surface2);border-color:var(--line);color:var(--fg3)}
+.btn-ok.is-blocked:hover{background:var(--surface2)}
+.btn-dark{background:transparent;border-color:#2b3a56;color:var(--hdr-fg)}
+.btn-dark:hover{background:#121c30}
+.btn-sm{min-height:30px;padding:0 10px;font-size:12px}
+.btn[disabled]{opacity:.55;cursor:default}
+
+/* grid */
+.main{padding-block:20px 40px}
+.grid{display:grid;gap:16px;grid-template-columns:minmax(0,1fr);align-items:start}
+@media (min-width:900px){.grid{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr)}.pane-tele{grid-column:1/-1}}
+@media (min-width:1260px){.grid{grid-template-columns:minmax(0,1.02fr) minmax(0,1.28fr) minmax(0,.86fr)}.pane-tele{grid-column:auto}}
+.pane{background:var(--surface);border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);min-width:0}
+.pane-h{padding:16px 18px 12px;border-bottom:1px solid var(--line2)}
+.eyebrow{font-size:10.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--fg3);font-weight:500}
+.pane-h h2{font-size:16px;font-weight:600;margin-top:2px}
+.pane-b{padding:16px 18px;display:flex;flex-direction:column;gap:16px}
+
+/* left pane */
+.row{display:flex;flex-wrap:wrap;align-items:center;gap:10px;justify-content:space-between}
+.field{display:flex;align-items:center;gap:8px;min-width:0}
+.field label{font-size:12px;color:var(--fg2);white-space:nowrap}
+.inp{height:32px;border:1px solid var(--line);border-radius:5px;background:var(--surface2);color:var(--fg);padding:0 10px;font:inherit;font-size:13px;min-width:0;width:150px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:5px;overflow:hidden}
+.seg button{border:0;background:var(--surface2);padding:0 12px;height:30px;font-size:12px;color:var(--fg2)}
+.seg button+button{border-left:1px solid var(--line)}
+.seg button[aria-pressed="true"]{background:var(--accent-soft);color:var(--accent-ink);font-weight:600}
+.ta,.clean{width:100%;min-height:270px;max-height:420px;border:1px solid var(--line);border-radius:6px;background:var(--surface2);color:var(--fg);padding:12px 14px;font:13px/1.6 var(--f-sans);overflow:auto}
+.ta{resize:vertical;display:block}
+.clean{white-space:pre-wrap;overflow-wrap:anywhere}
+.meta{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;color:var(--fg3)}
+.lock{display:inline-flex;align-items:center;gap:6px;color:var(--ok)}
+mark.mask{background:var(--mask-bg);color:var(--mask-fg);border-radius:3px;padding:0 4px;font-weight:500}
+.pipe{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:8px}
+.pipe li{display:flex;gap:8px;align-items:flex-start;font-size:12px;color:var(--fg3);padding:8px 10px;border:1px solid var(--line2);border-radius:5px;background:var(--surface2)}
+.pipe li.done{color:var(--fg);border-color:var(--line)}
+.pipe li.done .pi{color:var(--ok)}
+.pipe li.now{color:var(--fg);border-color:var(--accent)}
+.pipe li.now .pi{color:var(--accent)}
+.pi{flex:none;margin-top:1px;color:var(--fg3)}
+.sub-h{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.sub-h h3{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--fg2);font-weight:600}
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px}
+.rule{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 10px;border:1px solid var(--line2);border-radius:5px}
+.rule span{font-size:13px}
+.rule small{display:block;font-size:11px;color:var(--fg3)}
+.sw{position:relative;flex:none;width:34px;height:20px;border-radius:999px;border:1px solid var(--line);background:var(--surface2);padding:0}
+.sw::after{content:"";position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:var(--fg3);transition:transform .15s,background .15s}
+.sw[aria-checked="true"]{background:var(--ok-solid);border-color:var(--ok-solid)}
+.sw[aria-checked="true"]::after{transform:translateX(14px);background:#fff}
+.ents{display:flex;flex-direction:column;border:1px solid var(--line2);border-radius:6px;max-height:340px;overflow:auto}
+.ent{display:flex;gap:10px;padding:9px 12px;border-top:1px solid var(--line2)}
+.ent:first-child{border-top:0}
+.ent-ic{flex:none;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;margin-top:1px}
+.ent-ok .ent-ic{background:var(--ok-soft);color:var(--ok)}
+.ent-warn .ent-ic{background:var(--warn-soft);color:var(--warn)}
+.ent-body{min-width:0;flex:1}
+.ent-cat{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--fg3);display:flex;gap:8px}
+.ent-map{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;font-size:12.5px;margin-top:2px}
+.orig{overflow-wrap:anywhere}
+.orig.blur{filter:blur(5px);user-select:none}
+.ent-arrow{color:var(--fg3);flex:none}
+.unmasked{color:var(--warn);font-weight:600;font-size:12px}
+.note-ok{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--ok);background:var(--ok-soft);padding:8px 12px;border-radius:5px}
+.note-warn{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--warn);background:var(--warn-soft);padding:8px 12px;border-radius:5px}
+.note-bad{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--bad);background:var(--bad-soft);padding:8px 12px;border-radius:5px}
+.empty{padding:22px 14px;text-align:center;color:var(--fg3);font-size:13px;border:1px dashed var(--line);border-radius:6px}
+
+/* middle pane */
+.bar-top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;padding:12px 18px;border-bottom:1px solid var(--line2)}
+.chip{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:500;padding:4px 10px;border-radius:999px}
+.chip-ok{background:var(--ok-soft);color:var(--ok)}
+.chip-warn{background:var(--warn-soft);color:var(--warn)}
+.chip-bad{background:var(--bad-soft);color:var(--bad)}
+.chip-idle{background:var(--surface2);color:var(--fg3);border:1px solid var(--line)}
+.stage{padding:18px;background:var(--surface2);border-radius:0 0 8px 8px}
+.paper{background:var(--paper);color:var(--paper-fg);border:1px solid var(--line);border-radius:4px;padding:28px 30px;font-family:var(--f-serif);font-size:15px;line-height:1.62}
+.paper-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 16px;font:500 10.5px var(--f-sans);letter-spacing:.12em;text-transform:uppercase;color:var(--fg3);padding-bottom:12px;border-bottom:2px solid var(--paper-fg)}
+.doc-title{font-size:34px;font-weight:600;line-height:1.1;letter-spacing:-.01em;margin-top:18px}
+.doc-sub{font:500 12px var(--f-sans);letter-spacing:.05em;text-transform:uppercase;color:var(--fg2);margin-top:8px}
+.doc-lead{margin-top:16px;font-size:16.5px;line-height:1.55}
+.paper section{margin-top:24px}
+.paper h3{font:600 11px var(--f-sans);letter-spacing:.12em;text-transform:uppercase;color:var(--accent-ink);padding-bottom:6px;border-bottom:1px solid var(--line);margin-bottom:10px}
+.paper li{position:relative;padding-left:16px;margin-top:8px}
+.paper li::before{content:"";position:absolute;left:2px;top:.72em;width:5px;height:5px;background:var(--accent)}
+.fin{width:100%;border-collapse:collapse;font-family:var(--f-sans);font-size:13.5px}
+.fin td{padding:7px 0;border-bottom:1px solid var(--line2)}
+.fin td:first-child{color:var(--fg2)}
+.fin td:last-child{text-align:right;font-family:var(--f-mono);font-weight:500;font-variant-numeric:tabular-nums}
+.fin-wrap{overflow-x:auto;margin-bottom:12px}
+.paper footer{margin-top:26px;padding-top:12px;border-top:1px solid var(--line);font:400 11px/1.5 var(--f-sans);color:var(--fg3)}
+
+/* telemetry */
+.tsec{padding:16px 18px;border-top:1px solid var(--line2)}
+.tsec:first-of-type{border-top:0}
+.tsec h3{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--fg3);font-weight:600;margin-bottom:10px}
+.badge{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:6px;font-weight:600;font-size:15px}
+.badge-ok{background:var(--ok-soft);color:var(--ok)}
+.badge-warn{background:var(--warn-soft);color:var(--warn)}
+.badge-bad{background:var(--bad-soft);color:var(--bad)}
+.badge-idle{background:var(--surface2);color:var(--fg2);border:1px solid var(--line)}
+.checks{display:flex;flex-direction:column;gap:6px;margin-top:12px;font-size:12.5px;color:var(--fg2)}
+.checks li{display:flex;gap:8px;align-items:flex-start}
+.checks .y{color:var(--ok);flex:none;margin-top:2px}
+.checks .n{color:var(--bad);flex:none;margin-top:2px}
+.big{font-size:34px;font-weight:600;letter-spacing:-.02em;line-height:1}
+.big small{font-size:14px;font-weight:500;color:var(--fg3);letter-spacing:0;margin-left:4px}
+.cmp{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+.cmp-row{display:grid;grid-template-columns:78px 1fr 44px;gap:10px;align-items:center;font-size:12px;color:var(--fg2)}
+.cmp-row b{font-family:var(--f-mono);font-weight:500;text-align:right;color:var(--fg)}
+.track{height:10px;background:var(--surface2);border:1px solid var(--line2);border-radius:2px;overflow:hidden}
+.fill{height:100%}
+.f-slate{background:#64748b}
+.f-ok{background:var(--ok-solid)}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:12.5px;margin-top:12px}
+.kv dt{color:var(--fg3)}
+.kv dd{margin:0;text-align:right;overflow-wrap:anywhere}
+.route{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:12px;font-size:12px}
+.route span.s{padding:4px 8px;border:1px solid var(--line);border-radius:4px;background:var(--surface2)}
+.route span.s.hot{border-color:var(--accent);color:var(--accent-ink);background:var(--accent-soft);font-weight:600}
+.route .ar{color:var(--fg3)}
+.fine{font-size:11.5px;color:var(--fg3);margin-top:10px}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.stat{border:1px solid var(--line2);border-radius:5px;padding:8px 10px}
+.stat b{display:block;font-size:20px;font-weight:600;line-height:1.2}
+.stat span{font-size:11px;color:var(--fg3)}
+.acc{width:100%;display:flex;align-items:center;justify-content:space-between;gap:10px;background:transparent;border:0;padding:0;text-align:left}
+.acc h3{margin:0}
+.acc .id{font-size:11.5px;color:var(--fg3)}
+.chev{transition:transform .15s}
+.chev.open{transform:rotate(180deg)}
+.json{margin:12px 0 0;max-height:360px;overflow:auto;background:var(--surface2);border:1px solid var(--line);border-radius:5px;padding:12px;font:11.5px/1.55 var(--f-mono);white-space:pre;color:var(--fg)}
+
+/* toast */
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));z-index:30;display:flex;align-items:center;gap:10px;max-width:calc(100vw - 32px);padding:11px 16px;border-radius:6px;font-size:13px;font-weight:500;box-shadow:0 8px 24px rgba(0,0,0,.25);animation:rise .18s ease-out}
+.toast.ok{background:#064e3b;color:#d1fae5}
+.toast.bad{background:#7f1d1d;color:#fee2e2}
+@keyframes rise{from{opacity:0;transform:translate(-50%,8px)}to{opacity:1;transform:translate(-50%,0)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+.spin{animation:spin .8s linear infinite}
+@media (prefers-reduced-motion:reduce){.spin,.toast{animation:none}.sw::after,.chev{transition:none}}
+@media (max-width:560px){.paper{padding:20px 18px}.doc-title{font-size:28px}.inp{width:120px}}
+</style>
+<div id="root"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.3.1/umd/react-dom.production.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/htm@3.1.1/dist/htm.umd.js"></script>
+<script>
+/*SAN_START*/
+const DEFAULT_RULES={company:true,founder:true,financial:true,client:true,location:true,contact:true};
+const CATS=[
+  {id:'company',label:'Company identity',hint:'Legal name, trading aliases, founding year'},
+  {id:'founder',label:'Founders & people',hint:'Named owners, directors, executives'},
+  {id:'financial',label:'Financials',hint:'Exact revenue, EBITDA, asset values'},
+  {id:'client',label:'Anchor clients',hint:'Named customers and concentration'},
+  {id:'location',label:'Location',hint:'Towns, counties, regions'},
+  {id:'contact',label:'Contact details',hint:'Email, phone, postcode, URLs'}
+];
+const OWN_FIRM=['K3 Capital Group','K3 Capital','K3'];
+const CLIENTS=[
+  {re:/\b(?:Tesco|Sainsbury['’]?s|Asda|Morrisons|Waitrose|Co-op)\b/g,to:'Tier-1 UK Supermarket Retailer'},
+  {re:/\b(?:Aldi|Lidl)\b/g,to:'Discount Grocery Retailer'},
+  {re:/\bAmazon\b/g,to:'Global E-commerce Platform'},
+  {re:/\bBoots\b/g,to:'National Health & Beauty Retailer'},
+  {re:/\b(?:Marks (?:&|and) Spencer|John Lewis)\b/g,to:'Premium UK Retailer'},
+  {re:/\b(?:DHL|Royal Mail|Evri|DPD)\b/g,to:'National Parcel & Logistics Operator'},
+  {re:/\bNHS\b/g,to:'UK Public-sector Healthcare Body'},
+  {re:/\b(?:Pfizer|AstraZeneca|GSK|Novartis)\b/g,to:'Global Pharmaceutical Manufacturer'},
+  {re:/\b(?:Unilever|Nestl[eé]|Procter (?:&|and) Gamble)\b/g,to:'Multinational FMCG Manufacturer'}
+];
+const PLACES=['Greater Manchester','Trafford Park','Manchester','Bolton','Wigan','Salford','Stockport','Oldham','Rochdale','Bury','Warrington','Preston','Liverpool','Blackburn','Chorley','Altrincham','Cheshire','Lancashire','Merseyside'];
+const SUFFIX='(?:Ltd|Limited|PLC|plc|LLP|Group|Holdings|Inc)';
+const UNIT={billion:1e9,bn:1e9,million:1e6,mn:1e6,m:1e6,k:1e3};
+const esc=s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+
+const bracket=v=>{
+  if(v>=1e6){const lo=Math.max(1,Math.round(v/1e6*0.85));const hi=Math.max(lo+1,Math.round(v/1e6*1.15));return '£'+lo+'M - £'+hi+'M';}
+  const lo=Math.round(v/1e3*0.85),hi=Math.max(lo+1,Math.round(v/1e3*1.15));return '£'+lo+'k - £'+hi+'k';
+};
+const parseMoney=(m0,g1,g2,off,str)=>{
+  const v=parseFloat(g1.replace(/,/g,''))*(g2?UNIT[g2.toLowerCase()]:1);
+  const before=str.slice(Math.max(0,off-40),off);
+  const after=str.slice(off+m0.length,off+m0.length+24);
+  const f=after.match(/^\s*(?:in\s+)?(ebitda|operating profit|profit|revenue|turnover|sales)\b/i);
+  const b=before.match(/(ebitda|operating profit|profit|revenue|turnover|sales)[^.£]{0,20}$/i);
+  const label=(f&&f[1])||(b&&b[1]);
+  let kind='other';
+  if(label) kind=/ebitda|profit/i.test(label)?'ebitda':'revenue';
+  return {v,kind};
+};
+
+function sanitize(raw,rules,codename){
+  let out=raw;
+  const tags=new Map();
+  const addTag=(cat,orig,repl,aliases)=>{
+    const k=cat+'|'+orig;
+    const t=tags.get(k)||{cat,orig,repl,count:0,aliases:aliases||[]};
+    t.count+=1;tags.set(k,t);
+  };
+  const mask=(cat,re,fn)=>{
+    const on=rules[cat]!==false;
+    out=out.replace(re,(...a)=>{
+      const m=a[0];
+      const r=fn(m,a);
+      if(!r) return m;
+      addTag(cat,r.orig||m,r.repl,r.aliases);
+      return on?r.repl:m;
+    });
+  };
+
+  /* contact details */
+  mask('contact',/[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)+/g,()=>({repl:'[email redacted]'}));
+  mask('contact',/(?:\+44\s?|\b0)\d{3,4}[\s-]?\d{3}[\s-]?\d{3,4}\b/g,()=>({repl:'[phone redacted]'}));
+  mask('contact',/\b[A-Z]{1,2}\d[A-Z\d]?\s?\d[A-Z]{2}\b/g,()=>({repl:'[postcode redacted]'}));
+  mask('contact',/\b(?:https?:\/\/|www\.)\S+/gi,()=>({repl:'[web address redacted]'}));
+
+  /* company identity */
+  const names=new Set();
+  for(const m of out.matchAll(new RegExp("\\b([A-Z][A-Za-z0-9'’-]*(?:\\s+(?:&\\s+|and\\s+)?[A-Z][A-Za-z0-9'’-]*){0,5}?\\s+"+SUFFIX+")\\b",'g'))){
+    const full=m[1];
+    if(OWN_FIRM.some(f=>full===f||full.startsWith(f+' ')||f.startsWith(full))) continue;
+    if(CLIENTS.some(c=>new RegExp(c.re.source).test(full))) continue;
+    const stem=full.replace(new RegExp('\\s+'+SUFFIX+'$'),'');
+    if(!stem||/^(The|This|Our|Its|Their|A|An)$/.test(stem)) continue;
+    names.add(full);
+  }
+  names.forEach(full=>{
+    const stem=full.replace(new RegExp('\\s+'+SUFFIX+'$'),'');
+    const two=stem.split(/\s+/).slice(0,2).join(' ');
+    const vs=[...new Set([full,stem,two])].filter(v=>v.length>=4).sort((a,b)=>b.length-a.length);
+    mask('company',new RegExp('\\b(?:'+vs.map(esc).join('|')+')(?!\\w)','g'),()=>({orig:full,repl:'['+codename+']',aliases:vs}));
+  });
+  mask('company',/\b(?:founded|established|incorporated|formed)\s+(?:in\s+)?((?:19|20)\d{2})\b/gi,(m,a)=>{
+    const yrs=new Date().getFullYear()-parseInt(a[1],10);
+    if(yrs<5) return null;
+    return {repl:'[operating for '+Math.floor(yrs/5)*5+'+ years]'};
+  });
+
+  /* founders and people */
+  const people=new Map();
+  const BAD_FIRST=/^(The|This|That|Our|Its|Their|These|Those|North|South|East|West|Greater|Managing|Director)$/;
+  const notePerson=(name,label)=>{
+    const first=name.split(' ')[0];
+    if(BAD_FIRST.test(first)||OWN_FIRM.some(f=>name.startsWith(f))) return;
+    if(!people.has(name)) people.set(name,label);
+  };
+  for(const m of out.matchAll(/\b(?:[Ff]ounder(?:\s+and\s+(?:Managing Director|CEO|Chairman|[Oo]wner|[Dd]irector))?|[Ff]ounded by|[Oo]wned by|Managing Director|CEO|Chairman|[Oo]wner|[Dd]irector|[Ll]ed by)[,:]?\s+([A-Z][a-z]+(?:\s+[A-Z][a-z]+){1,2})\b/g)){
+    notePerson(m[1],/found|own/i.test(m[0])?'Founder':'Executive');
+  }
+  for(const m of out.matchAll(/\b(?:Mr|Mrs|Ms|Dr)\.?\s+([A-Z][a-z]+(?:\s+[A-Z][a-z]+){0,2})\b/g)){
+    notePerson(m[1],'Executive');
+  }
+  people.forEach((label,name)=>{
+    const parts=name.split(' ');
+    const vs=[...new Set([name,parts[parts.length-1],parts[0]])].filter(v=>v.length>=3).sort((a,b)=>b.length-a.length);
+    mask('founder',new RegExp('\\b(?:'+vs.map(esc).join('|')+')(?!\\w)','g'),()=>({orig:name,repl:'['+label+']',aliases:vs}));
+  });
+
+  /* anchor clients */
+  CLIENTS.forEach(c=>mask('client',new RegExp(c.re.source,'g'),m=>({orig:m,repl:'['+c.to+']'})));
+
+  /* financials */
+  mask('financial',/\b(\d{1,2}(?:\.\d+)?)\s?%\s+of\s+(?:the\s+)?(?:total\s+)?(?:group\s+)?(revenue|turnover|sales)\b/gi,(m,a)=>{
+    const n=Math.round(parseFloat(a[1])/5)*5;
+    if(n<=0) return null;
+    return {repl:'[c.'+n+'% of '+a[2].toLowerCase()+']'};
+  });
+  let REV=null;
+  for(const m of out.matchAll(/£\s?(\d{1,3}(?:,\d{3})+|\d+(?:\.\d+)?)\s?(billion|million|bn|mn|m|k)?(?![A-Za-z])/gi)){
+    const p=parseMoney(m[0],m[1],m[2],m.index,out);
+    if(REV===null&&p.kind==='revenue'&&p.v>=100000) REV=p.v;
+  }
+  mask('financial',/£\s?(\d{1,3}(?:,\d{3})+|\d+(?:\.\d+)?)\s?(billion|million|bn|mn|m|k)?(?![A-Za-z])/gi,(m,a)=>{
+    const p=parseMoney(m,a[1],a[2],a[a.length-2],a[a.length-1]);
+    if(p.v<100000) return null;
+    if(p.kind==='revenue') return {repl:'['+bracket(p.v)+' revenue bracket]'};
+    if(p.kind==='ebitda'){
+      if(!REV) return {repl:'[EBITDA redacted]'};
+      const lo=Math.floor(p.v/REV*100/2)*2;
+      return {repl:'['+lo+'-'+(lo+2)+'% EBITDA margin]'};
+    }
+    return {repl:'['+bracket(p.v)+' bracket]'};
+  });
+
+  /* location */
+  mask('location',new RegExp('\\b(?:'+PLACES.map(esc).join('|')+')\\b','g'),()=>({repl:'[North West England]'}));
+  out=out.replace(/\[North West England\](?:\s*(?:,|and|&|\/)\s*\[North West England\])+/g,'[North West England]');
+
+  /* residual scan */
+  const order=CATS.map(c=>c.id);
+  const list=[...tags.values()].sort((a,b)=>order.indexOf(a.cat)-order.indexOf(b.cat)||b.count-a.count);
+  const residual=[];const seen=new Set();
+  list.forEach(t=>{
+    [t.orig,...(t.aliases||[])].forEach(n=>{
+      if(n.length<3) return;
+      if(new RegExp('(^|[^\\w])'+esc(n)+'(?!\\w)').test(out)){
+        const k=t.cat+'|'+t.orig;
+        if(!seen.has(k)){seen.add(k);residual.push({cat:t.cat,orig:t.orig});}
+      }
+    });
+  });
+  const detected=list.reduce((a,t)=>a+t.count,0);
+  const masked=list.reduce((a,t)=>a+(rules[t.cat]!==false?t.count:0),0);
+  return {out,tags:list,residual,detected,masked};
+}
+
+const THE=/\b(?:consolidat\w*|opportunit\w*|growth|succession|partner|acqui\w*|market|strateg\w*|step back|retire\w*|well placed|next phase|buyer|exit)\b/i;
+const FIN=/\b(?:EBITDA|revenue|turnover|CAGR|margin|profit|bracket|freehold|valued)\b|% of revenue/i;
+const OPS=/\b(?:fleet|vehicles?|employees?|staff|headcount|sites?|depots?|warehous\w*|telematics|capacity|sq ft|drivers?|accredit\w*|customers?|clients?|contracts?|framework|invested|operations?)\b/i;
+const SECTORS=[
+  [/temperature-controlled|cold[- ]chain|chilled/i,'Temperature-controlled logistics'],
+  [/haulage|logistics|warehous|freight/i,'Transport & logistics'],
+  [/software|saas/i,'Software & technology'],
+  [/manufactur/i,'Manufacturing'],
+  [/accountan|advisory|consult/i,'Professional services'],
+  [/retail|e-?commerce/i,'Retail & consumer'],
+  [/clinic|care home|healthcare/i,'Healthcare services']
+];
+const tidy=s=>{
+  s=s.replace(/(?:\b(?:the\s+)?(?:[Ff]ounder(?:\s+and\s+(?:Managing Director|CEO|Chairman|[Oo]wner|[Dd]irector))?|Managing Director|CEO|[Cc]hairman|[Oo]wner|[Dd]irector)[,:]?\s+)?\[(Founder|Executive)\]/g,(m,g)=>g==='Founder'?'the founder':'management');
+  s=s.replace(/\s{2,}/g,' ').trim();
+  return s.charAt(0).toUpperCase()+s.slice(1);
+};
+function buildTeaser(txt,codename){
+  const lines=txt.split(/\n+/).map(s=>s.trim()).filter(l=>l&&!/^confidential|^strictly private/i.test(l));
+  const body=lines.join(' ');
+  let sents=body.replace(/([.!?])\s+(?=[A-Z\[])/g,'$1\u0001').split('\u0001').map(s=>s.trim()).filter(Boolean);
+  sents=sents.filter(s=>!/\[(?:email|phone|web address) redacted\]/.test(s)).map(s=>s.replace(/\s*\(\[postcode redacted\]\)/g,'').replace(/\s*\[postcode redacted\]/g,'')).map(tidy);
+  const t={codename,sector:null,region:null,overview:'',thesis:[],ops:[],fin:[],rows:[],empty:sents.length===0};
+  sents.forEach((s,i)=>{
+    if(i===0){t.overview=s;return;}
+    const k=/\b(?:anchor client|clients?|customers?|contracts?|framework)\b/i.test(s)?'ops':THE.test(s)?'thesis':FIN.test(s)?'fin':OPS.test(s)?'ops':'thesis';
+    t[k].push(s);
+  });
+  for(const [re,label] of SECTORS){if(re.test(body)){t.sector=label;break;}}
+  if(/\[North West England\]/.test(body)) t.region='North West England';
+  const g=(re)=>{const m=body.match(re);return m?m:null;};
+  let m;
+  if((m=g(/\[(£\d+[Mk] - £\d+[Mk]) revenue bracket\]/))) t.rows.push(['Revenue (latest FY)',m[1]]);
+  if((m=g(/\[(\d+-\d+%) EBITDA margin\]/))) t.rows.push(['EBITDA margin',m[1]]);
+  if((m=g(/CAGR of (\d+(?:\.\d+)?)%/i))) t.rows.push(['Revenue CAGR','c.'+m[1]+'%']);
+  if((m=g(/\[c\.(\d+)% of (?:revenue|turnover|sales)\]/))) t.rows.push(['Anchor client concentration','c.'+m[1]+'% of revenue']);
+  if((m=g(/\[operating for (\d+\+ years)\]/))) t.rows.push(['Trading history',m[1]]);
+  if((m=g(/(\d[\d,]*)\s+(?:full-time\s+)?(?:employees|staff|people)/i))) t.rows.push(['Headcount',m[1]]);
+  if((m=g(/(\d[\d,]*)\s+(?:[\w-]+\s+){0,2}vehicles/i))) t.rows.push(['Fleet',m[1]+' vehicles']);
+  if((m=g(/([\d,]+)\s*sq\s*ft/i))) t.rows.push(['Warehousing',m[1]+' sq ft']);
+  if((m=g(/freehold[^\[\]]*\[(£\d+[Mk] - £\d+[Mk]) bracket\]/))) t.rows.push(['Freehold property',m[1]]);
+  return t;
+}
+function teaserToText(t){
+  const L=[];
+  L.push(t.codename.toUpperCase()+' | ANONYMISED INVESTMENT TEASER');
+  L.push([t.sector,t.region,'Sell-side mandate'].filter(Boolean).join(' | '));
+  L.push('');
+  if(t.overview) L.push(t.overview,'');
+  const sec=(h,items)=>{if(items.length){L.push(h.toUpperCase());items.forEach(i=>L.push('- '+i));L.push('');}};
+  sec('Investment Thesis',t.thesis);
+  sec('Operational Highlights',t.ops);
+  if(t.rows.length){L.push('NORMALISED FINANCIALS');t.rows.forEach(r=>L.push(r[0]+': '+r[1]));L.push('');}
+  sec('Financial Commentary',t.fin);
+  L.push('Prepared by K3 Capital Group. Confidential and subject to NDA. This summary is not an offer to sell or a solicitation to buy securities.');
+  return L.join('\n');
+}
+const fp=s=>{let h=5381;for(let i=0;i<s.length;i++)h=((h<<5)+h+s.charCodeAt(i))|0;return (h>>>0).toString(16).padStart(8,'0');};
+const SAMPLE=[
+'CONFIDENTIAL – STRICTLY PRIVATE. Prepared for the K3 deal team.',
+'',
+'Bolton Transport & Logistics Ltd is a family-owned, temperature-controlled haulage and warehousing business founded in 1998 and headquartered in Bolton, Greater Manchester (BL1 4QR). The company is led by founder and Managing Director John Smith, who has indicated he wishes to step back from day-to-day operations within 18 months. John Smith can be reached at john.smith@boltontransport.co.uk or 07700 900123.',
+'',
+'In the year to March 2026 Bolton Transport & Logistics reported revenue of £14.2M and EBITDA of £2.1M. Revenue has grown at a CAGR of 9% over the last four years, driven by regional grocery and pharmaceutical distribution. Tesco is the anchor client and accounts for 31% of revenue under a rolling five-year framework agreement; Boots and Amazon make up a further 18% of revenue. The company also owns a freehold distribution depot valued at £3.4M.',
+'',
+'Operations run from two sites across Greater Manchester and Wigan, with a fleet of 84 temperature-controlled vehicles, 140 employees and 62,000 sq ft of ambient and chilled warehousing. Bolton Transport has invested heavily in telematics and route optimisation, reducing empty running by 12%. Smith believes the business is well placed for consolidation, with a clear opportunity to add cold-chain capacity in the North West. The shareholders are seeking a strategic or private-equity partner to support the next phase of growth and a managed succession.'
+].join('\n');
+/*SAN_END*/
+
+const {useState,useMemo,useEffect,useRef}=React;
+const html=htm.bind(React.createElement);
+
+const ICONS={
+  shield:'<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/>',
+  check:'<path d="M20 6 9 17l-5-5"/>',
+  alert:'<path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/>',
+  xcircle:'<circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/>',
+  eye:'<path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/>',
+  eyeoff:'<path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49"/><path d="M14.084 14.158a3 3 0 0 1-4.242-4.242"/><path d="M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143"/><path d="m2 2 20 20"/>',
+  copy:'<rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>',
+  file:'<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/>',
+  clock:'<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>',
+  cpu:'<rect width="16" height="16" x="4" y="4" rx="2"/><rect width="6" height="6" x="9" y="9" rx="1"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/>',
+  chevron:'<path d="m6 9 6 6 6-6"/>',
+  zap:'<path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/>',
+  trash:'<path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>',
+  lock:'<rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+  loader:'<path d="M21 12a9 9 0 1 1-6.219-8.56"/>',
+  arrow:'<path d="M5 12h14"/><path d="m12 5 7 7-7 7"/>',
+  play:'<path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/>',
+  dot:'<circle cx="12" cy="12" r="3"/>'
+};
+const Icon=({name,size=16,className=''})=>html`<svg className=${className} width=${size} height=${size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" dangerouslySetInnerHTML=${{__html:ICONS[name]}} />`;
+
+const Marked=({text})=>html`<span>${text.split(/(\[[^\]]+\])/g).map((p,i)=>/^\[[^\]]+\]$/.test(p)?html`<mark key=${i} className="mask">${p}</mark>`:p)}</span>`;
+const Switch=({on,onChange,label})=>html`<button type="button" role="switch" aria-checked=${on} aria-label=${label} className="sw" onClick=${onChange} />`;
+
+const MANUAL=90,AUTO=5,SAVED=85;
+const STAGES=['Scan for entities (regex and dictionary)','Mask entities in this browser','Residual leak scan on the payload','Route sanitised payload to the model'];
+const mkSig=(raw,codename,rules)=>JSON.stringify([raw,codename,rules]);
+const hhmmss=d=>d.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+
+function fallbackCopy(text){
+  try{
+    const ta=document.createElement('textarea');
+    ta.value=text;ta.setAttribute('readonly','');ta.style.position='fixed';ta.style.opacity='0';
+    document.body.appendChild(ta);ta.select();
+    const ok=document.execCommand('copy');
+    document.body.removeChild(ta);
+    return ok;
+  }catch(e){return false;}
+}
+
+function App(){
+  const [raw,setRaw]=useState(SAMPLE);
+  const [codename,setCodename]=useState('Project Apex');
+  const [rules,setRules]=useState({...DEFAULT_RULES});
+  const [view,setView]=useState('raw');
+  const [reveal,setReveal]=useState(true);
+  const [running,setRunning]=useState(false);
+  const [stage,setStage]=useState(0);
+  const [cert,setCert]=useState(()=>({sig:mkSig(SAMPLE,'Project Apex',DEFAULT_RULES),at:new Date()}));
+  const [events,setEvents]=useState(()=>[{t:new Date().toISOString(),type:'pipeline_certified',detail:'sample case'}]);
+  const [released,setReleased]=useState([]);
+  const [blocked,setBlocked]=useState(0);
+  const [toast,setToast]=useState(null);
+  const [auditOpen,setAuditOpen]=useState(false);
+  const timers=useRef([]);
+  const latest=useRef({});
+
+  const res=useMemo(()=>sanitize(raw,rules,codename),[raw,rules,codename]);
+  const teaser=useMemo(()=>buildTeaser(res.out,codename),[res.out,codename]);
+  const sig=mkSig(raw,codename,rules);
+  const hasText=raw.trim().length>0;
+  const certified=!!cert&&cert.sig===sig&&res.residual.length===0&&hasText;
+  latest.current={raw,res,sig};
+
+  useEffect(()=>()=>timers.current.forEach(clearTimeout),[]);
+  useEffect(()=>{
+    if(!toast) return;
+    const id=setTimeout(()=>setToast(null),3200);
+    return ()=>clearTimeout(id);
+  },[toast]);
+
+  const log=(type,detail)=>setEvents(e=>[{t:new Date().toISOString(),type,detail},...e].slice(0,6));
+  const flash=(msg,kind)=>setToast({msg,kind:kind||'ok',id:Date.now()});
+
+  const finish=()=>{
+    const {res:r,sig:s}=latest.current;
+    setRunning(false);
+    if(r.residual.length){
+      setBlocked(b=>b+1);
+      log('pipeline_halted',r.residual.length+' unmasked entities');
+      flash('Pipeline halted: '+r.residual.length+' unmasked '+(r.residual.length===1?'entity':'entities')+' found','bad');
+    }else{
+      setCert({sig:s,at:new Date()});
+      log('pipeline_certified',r.masked+' entities masked');
+      flash('Pipeline complete. Teaser certified for release.');
+    }
+  };
+  const run=()=>{
+    if(running||!latest.current.raw.trim()) return;
+    timers.current.forEach(clearTimeout);timers.current=[];
+    setRunning(true);setStage(0);
+    [1,2,3,4].forEach((n,i)=>timers.current.push(setTimeout(()=>{setStage(n);if(n===4) finish();},430*(i+1))));
+  };
+  const loadSample=()=>{
+    setRaw(SAMPLE);setCodename('Project Apex');setRules({...DEFAULT_RULES});setView('raw');
+    log('sample_loaded','M&A sample case');
+    flash('Sample case loaded. Running governed pipeline.');
+    setTimeout(run,80);
+  };
+  const clearAll=()=>{setRaw('');setView('raw');log('input_cleared','');};
+  const toggleRule=id=>{
+    setRules(r=>({...r,[id]:!r[id]}));
+    log('rule_changed',id+' masking '+(rules[id]?'disabled':'enabled'));
+  };
+  const copy=async()=>{
+    if(!hasText){flash('Nothing to copy. Add a briefing first.','bad');return;}
+    if(res.residual.length){
+      setBlocked(b=>b+1);log('copy_blocked',res.residual.length+' unmasked entities');
+      flash('Copy blocked: '+res.residual.length+' raw '+(res.residual.length===1?'entity':'entities')+' still in the teaser','bad');return;
+    }
+    if(!certified){
+      setBlocked(b=>b+1);log('copy_blocked','pipeline not run on current text');
+      flash('Run the governed pipeline before copying.','bad');return;
+    }
+    const text=teaserToText(teaser);
+    let ok=false;
+    try{await navigator.clipboard.writeText(text);ok=true;}catch(e){ok=fallbackCopy(text);}
+    if(ok){
+      setReleased(r=>r.includes(sig)?r:[...r,sig]);
+      log('teaser_copied',res.masked+' entities masked');
+      flash('Governed teaser copied to clipboard');
+    }else{
+      flash('Clipboard unavailable here. Select the teaser text and copy it manually.','bad');
+    }
+  };
+
+  const words=hasText?res.out.trim().split(/\s+/).length:0;
+  const rawWords=hasText?raw.trim().split(/\s+/).length:0;
+  const tokens=Math.ceil(words*1.33);
+  const pct=res.detected?Math.round(res.masked/res.detected*100):100;
+  const state=!hasText?'idle':res.residual.length?'breach':certified?'ok':'pending';
+  const byCat={};
+  res.tags.forEach(t=>{if(rules[t.cat]!==false) byCat[t.cat]=(byCat[t.cat]||0)+t.count;});
+
+  const audit=useMemo(()=>{
+    const at=cert?cert.at.toISOString():new Date().toISOString();
+    return {
+      record_id:'K3-AUD-'+fp(sig+at).toUpperCase(),
+      generated_at:at,
+      tool:'K3 Governed Teaser Studio',
+      policy:'K3 AI Policy: no raw confidential data to external models',
+      status:state==='ok'?'CERTIFIED':state==='breach'?'BLOCKED':state==='idle'?'NO_INPUT':'DRAFT',
+      sanitisation:{executed_in:'client-side (browser)',method:'regex and dictionary tagging',entities_detected:res.detected,entities_masked:res.masked,by_category:byCat,residual_matches:res.residual.length},
+      payload:{raw_text_transmitted:false,sanitised_words:words,approx_tokens:tokens,input_fingerprint:fp(raw)},
+      model_route:{model:'Claude 3.5 Sonnet',mode:'simulated',estimated_cost_gbp:0.023},
+      productivity:{manual_benchmark_min:MANUAL,automated_min:AUTO,minutes_saved:SAVED},
+      recent_events:events
+    };
+  },[cert,sig,state,res,byCat,words,tokens,raw,events]);
+  const auditJson=JSON.stringify(audit,null,2);
+  const copyAudit=async()=>{
+    let ok=false;
+    try{await navigator.clipboard.writeText(auditJson);ok=true;}catch(e){ok=fallbackCopy(auditJson);}
+    flash(ok?'Audit record copied':'Clipboard unavailable here. Select the JSON and copy it manually.',ok?'ok':'bad');
+  };
+
+  /* ---------- left pane ---------- */
+  const entRows=res.tags.map((t,i)=>{
+    const on=rules[t.cat]!==false;
+    const cat=CATS.find(c=>c.id===t.cat).label;
+    return html`<li key=${t.cat+i+t.orig} className=${'ent '+(on?'ent-ok':'ent-warn')}>
+      <span className="ent-ic"><${Icon} name=${on?'check':'alert'} size=${13} /></span>
+      <div className="ent-body">
+        <div className="ent-cat"><span>${cat}</span>${t.count>1?html`<span className="mono">x${t.count}</span>`:null}</div>
+        <div className="ent-map">
+          <span className=${'orig mono'+(reveal?'':' blur')}>${t.orig}</span>
+          <${Icon} name="arrow" size=${13} className="ent-arrow" />
+          ${on?html`<mark className="mask">${t.repl}</mark>`:html`<span className="unmasked">not masked</span>`}
+        </div>
+      </div>
+    </li>`;
+  });
+
+  const left=html`<section className="pane" aria-labelledby="h-in">
+    <div className="pane-h">
+      <div className="eyebrow">Input · stays in this tab</div>
+      <h2 id="h-in">Briefing and sanitisation</h2>
+    </div>
+    <div className="pane-b">
+      <div className="row">
+        <div className="field">
+          <label htmlFor="codename">Project codename</label>
+          <input id="codename" className="inp" value=${codename} maxLength=${24} onChange=${e=>setCodename(e.target.value.trim()?e.target.value:'Project Apex')} />
+        </div>
+        <div className="seg" role="group" aria-label="Briefing view">
+          <button type="button" aria-pressed=${view==='raw'} onClick=${()=>setView('raw')}>Raw briefing</button>
+          <button type="button" aria-pressed=${view==='clean'} onClick=${()=>setView('clean')}>Sanitised payload</button>
+        </div>
+      </div>
+      ${view==='raw'
+        ?html`<textarea id="briefing" className="ta" spellCheck=${false} value=${raw} onChange=${e=>setRaw(e.target.value)} placeholder="Paste the confidential company memo here. Nothing is sent anywhere: masking runs in this browser tab." />`
+        :html`<div className="clean" tabIndex=${0} aria-label="Sanitised payload">${hasText?html`<${Marked} text=${res.out} />`:html`<span style=${{color:'var(--fg3)'}}>No input yet.</span>`}</div>`}
+      <div className="meta">
+        <span className="lock"><${Icon} name="lock" size=${13} /> Raw text never leaves this tab</span>
+        <span>${rawWords} words in</span>
+        <span>${words} words in payload</span>
+      </div>
+      <div className="row">
+        <button type="button" className="btn btn-primary" onClick=${run} disabled=${running||!hasText}>
+          <${Icon} name=${running?'loader':'play'} size=${14} className=${running?'spin':''} /> ${running?'Running pipeline':'Run governed pipeline'}
+        </button>
+        <span className="eyebrow">${certified&&!running?'Certified '+hhmmss(cert.at):running?'Step '+Math.min(stage+1,4)+' of 4':'Not yet certified'}</span>
+      </div>
+      <ul className="pipe" aria-label="Pipeline stages">
+        ${STAGES.map((s,i)=>{
+          const done=running?stage>i:certified;
+          const now=running&&stage===i;
+          return html`<li key=${i} className=${done?'done':now?'now':''}>
+            <span className="pi"><${Icon} name=${done?'check':now?'loader':'dot'} size=${14} className=${now?'spin':''} /></span>${s}
+          </li>`;
+        })}
+      </ul>
+      <div>
+        <div className="sub-h" style=${{marginBottom:'8px'}}><h3>Masking rules</h3><span className="eyebrow">Switch off to test the leak guard</span></div>
+        <div className="rules">
+          ${CATS.map(c=>html`<div key=${c.id} className="rule">
+            <span>${c.label}<small>${c.hint}</small></span>
+            <${Switch} on=${rules[c.id]} label=${'Mask '+c.label} onChange=${()=>toggleRule(c.id)} />
+          </div>`)}
+        </div>
+      </div>
+      <div>
+        <div className="sub-h" style=${{marginBottom:'8px'}}>
+          <h3>Detected entities (${res.tags.length})</h3>
+          <button type="button" className="btn btn-sm" onClick=${()=>setReveal(r=>!r)}><${Icon} name=${reveal?'eyeoff':'eye'} size=${13} /> ${reveal?'Hide originals':'Show originals'}</button>
+        </div>
+        ${res.tags.length?html`<ul className="ents">${entRows}</ul>`:html`<div className="empty">No sensitive entities detected yet. Load the sample case or paste a briefing.</div>`}
+        <div style=${{marginTop:'10px'}}>
+          ${res.residual.length
+            ?html`<div className="note-bad"><${Icon} name="xcircle" size=${15} /> ${res.residual.length} raw ${res.residual.length===1?'value is':'values are'} still in the payload. Copy and model routing are blocked.</div>`
+            :hasText?html`<div className="note-ok"><${Icon} name="shield" size=${15} /> ${res.masked} ${res.masked===1?'value':'values'} masked. Residual scan found 0 raw entities.</div>`:null}
+        </div>
+      </div>
+    </div>
+  </section>`;
+
+  /* ---------- middle pane ---------- */
+  const chip=state==='ok'?html`<span className="chip chip-ok"><${Icon} name="check" size=${13} /> Governed · ${hhmmss(cert.at)}</span>`
+    :state==='pending'?html`<span className="chip chip-warn"><${Icon} name="alert" size=${13} /> Draft · re-run the pipeline</span>`
+    :state==='breach'?html`<span className="chip chip-bad"><${Icon} name="xcircle" size=${13} /> Blocked · ${res.residual.length} unmasked</span>`
+    :html`<span className="chip chip-idle">No input</span>`;
+  const today=new Date().toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+  const subline=[teaser.sector,teaser.region,'Sell-side mandate'].filter(Boolean).join(' · ');
+  const bullets=items=>html`<ul>${items.map((s,i)=>html`<li key=${i}><${Marked} text=${s} /></li>`)}</ul>`;
+  const middle=html`<section className="pane" aria-labelledby="h-out">
+    <div className="pane-h">
+      <div className="eyebrow">Output · anonymous buyer view</div>
+      <h2 id="h-out">Anonymous buyer teaser</h2>
+    </div>
+    <div className="bar-top">
+      ${chip}
+      <button type="button" className=${'btn btn-ok'+(state==='ok'?'':' is-blocked')} onClick=${copy} title=${state==='ok'?'Copy the teaser to the clipboard':'Copy is available once the teaser is certified'}>
+        <${Icon} name="copy" size=${14} /> Copy Governed Teaser
+      </button>
+    </div>
+    <div className="stage">
+      ${hasText&&!teaser.empty?html`<article className="paper">
+        <div className="paper-top"><span>Confidential · Anonymised teaser</span><span>${today}</span></div>
+        <h2 className="doc-title">${codename}</h2>
+        <p className="doc-sub">${subline}</p>
+        ${teaser.overview?html`<p className="doc-lead"><${Marked} text=${teaser.overview} /></p>`:null}
+        ${teaser.thesis.length?html`<section><h3>Investment thesis</h3>${bullets(teaser.thesis)}</section>`:null}
+        ${teaser.ops.length?html`<section><h3>Operational highlights</h3>${bullets(teaser.ops)}</section>`:null}
+        ${(teaser.rows.length||teaser.fin.length)?html`<section><h3>Normalised financials</h3>
+          ${teaser.rows.length?html`<div className="fin-wrap"><table className="fin"><tbody>${teaser.rows.map((r,i)=>html`<tr key=${i}><td>${r[0]}</td><td>${r[1]}</td></tr>`)}</tbody></table></div>`:null}
+          ${teaser.fin.length?bullets(teaser.fin):null}
+        </section>`:null}
+        <footer>Prepared by K3 Capital Group. Confidential and subject to NDA. All figures are bracketed or rounded. This summary is not an offer to sell or a solicitation to buy securities.</footer>
+      </article>`:html`<div className="empty" style=${{background:'var(--surface)'}}>
+        <p style=${{marginBottom:'12px'}}>The teaser appears here once there is a briefing to sanitise.</p>
+        <button type="button" className="btn btn-primary" onClick=${loadSample}><${Icon} name="zap" size=${14} /> Load M&A Sample Case</button>
+      </div>`}
+    </div>
+  </section>`;
+
+  /* ---------- right pane ---------- */
+  const badge={
+    ok:{cls:'badge-ok',icon:'shield',text:pct+'% In-Browser Sanitized'},
+    pending:{cls:'badge-warn',icon:'alert',text:pct+'% sanitised · re-run to certify'},
+    breach:{cls:'badge-bad',icon:'xcircle',text:'Golden Rule at risk'},
+    idle:{cls:'badge-idle',icon:'shield',text:'Awaiting briefing'}
+  }[state];
+  const right=html`<section className="pane pane-tele" aria-labelledby="h-tel">
+    <div className="pane-h">
+      <div className="eyebrow">Governance · adoption telemetry</div>
+      <h2 id="h-tel">K3 governance sidebar</h2>
+    </div>
+
+    <div className="tsec">
+      <h3>K3 Golden Rule status</h3>
+      <div className=${'badge '+badge.cls}><${Icon} name=${badge.icon} size=${20} /> ${badge.text}</div>
+      <ul className="checks">
+        <li><span className="y"><${Icon} name="check" size=${14} /></span>Masking executed in this browser tab</li>
+        <li><span className=${res.residual.length?'n':'y'}><${Icon} name=${res.residual.length?'xcircle':'check'} size=${14} /></span>Residual scan: ${res.residual.length} raw ${res.residual.length===1?'entity':'entities'} in the payload</li>
+        <li><span className="y"><${Icon} name="check" size=${14} /></span>Raw text transmitted: 0 bytes</li>
+        <li><span className=${res.residual.length?'n':'y'}><${Icon} name=${res.residual.length?'xcircle':'check'} size=${14} /></span>Only the sanitised payload may reach a model</li>
+      </ul>
+    </div>
+
+    <div className="tsec">
+      <h3>Time released</h3>
+      <div className="big mono">${SAVED}<small>mins saved</small></div>
+      <div className="cmp">
+        <div className="cmp-row"><span>Manual</span><div className="track"><div className="fill f-slate" style=${{width:'100%'}}></div></div><b>${MANUAL}m</b></div>
+        <div className="cmp-row"><span>Automated</span><div className="track"><div className="fill f-ok" style=${{width:(AUTO/MANUAL*100)+'%'}}></div></div><b>${AUTO}m</b></div>
+      </div>
+      <p className="fine">Benchmark: ${MANUAL} minutes to sanitise a memo by hand against ${AUTO} minutes with the studio, ${Math.round(SAVED/MANUAL*100)}% faster per teaser.</p>
+    </div>
+
+    <div className="tsec">
+      <h3>Cost and model routing</h3>
+      <div className="big mono">£0.023<small>est. per teaser</small></div>
+      <div className="route" aria-label="Routing path">
+        <span className="s">Browser sanitiser</span><span className="ar"><${Icon} name="arrow" size=${12} /></span>
+        <span className="s">Policy gate</span><span className="ar"><${Icon} name="arrow" size=${12} /></span>
+        <span className="s hot">Claude 3.5 Sonnet</span>
+      </div>
+      <dl className="kv">
+        <dt>Routed to</dt><dd>Claude 3.5 Sonnet</dd>
+        <dt>Sanitised payload</dt><dd className="mono">~${tokens} tokens</dd>
+        <dt>Raw text sent</dt><dd className="mono">0 tokens</dd>
+      </dl>
+      <p className="fine">Demo route. This page makes no network call to a model.</p>
+    </div>
+
+    <div className="tsec">
+      <h3>Session adoption</h3>
+      <div className="stats">
+        <div className="stat"><b className="mono">${released.length}</b><span>Teasers released</span></div>
+        <div className="stat"><b className="mono">${res.masked}</b><span>Entities masked</span></div>
+        <div className="stat"><b className="mono">${blocked}</b><span>Blocked by policy</span></div>
+      </div>
+      <p className="fine">${released.length?released.length*SAVED+' minutes released this session.':'Copy a certified teaser to log a release.'}</p>
+    </div>
+
+    <div className="tsec">
+      <button type="button" className="acc" aria-expanded=${auditOpen} onClick=${()=>setAuditOpen(o=>!o)}>
+        <span><h3>Audit record</h3><span className="id mono">${audit.record_id}</span></span>
+        <${Icon} name="chevron" size=${18} className=${'chev'+(auditOpen?' open':'')} />
+      </button>
+      ${auditOpen?html`<div>
+        <pre className="json" tabIndex=${0} aria-label="Compliance audit log JSON">${auditJson}</pre>
+        <div style=${{marginTop:'10px'}}><button type="button" className="btn btn-sm" onClick=${copyAudit}><${Icon} name="copy" size=${13} /> Copy audit JSON</button></div>
+      </div>`:html`<p className="fine">Compliance log for this teaser. Contains counts and a fingerprint, never original values.</p>`}
+    </div>
+  </section>`;
+
+  return html`<div>
+    <header className="top">
+      <div className="top-in">
+        <div className="brand">
+          <div className="mono-k3" aria-hidden="true">K3</div>
+          <div>
+            <div className="brand-kicker">K3 Capital Group</div>
+            <h1>Governed M&A Teaser Studio <span>& Adoption Telemetry</span></h1>
+          </div>
+        </div>
+        <div className="top-actions">
+          <span className="policy-chip"><span className="dot"></span> AI Policy: client-side sanitisation enforced</span>
+          <button type="button" className="btn btn-primary" onClick=${loadSample}><${Icon} name="zap" size=${14} /> Load M&A Sample Case</button>
+          <button type="button" className="btn btn-dark" onClick=${clearAll}><${Icon} name="trash" size=${14} /> Clear</button>
+        </div>
+      </div>
+    </header>
+    <main className="main">
+      <div className="grid">${left}${middle}${right}</div>
+    </main>
+    ${toast?html`<div key=${toast.id} className=${'toast '+toast.kind} role="status"><${Icon} name=${toast.kind==='ok'?'check':'xcircle'} size=${16} /> ${toast.msg}</div>`:null}
+  </div>`;
+}
+ReactDOM.createRoot(document.getElementById('root')).render(html`<${App} />`);
+</script>
+
+</body></html>
